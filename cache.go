@@ -10,6 +10,13 @@ type CacheItem struct {
 	Expiration int64
 }
 
+type CacheInterface interface {
+	Set(key string, value interface{}, expiration time.Duration)
+	Get(key string) (interface{}, bool)
+	Delete(key string)
+	Cleanup()
+}
+
 // Cache represents the in-memory cache
 type Cache struct {
 	items map[string]CacheItem
